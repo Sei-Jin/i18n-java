@@ -11,11 +11,12 @@ public class Day03 {
     
     private static final int MIN_LENGTH = 4;
     private static final int MAX_LENGTH = 12;
+    private static final int MAX_7_BIT_VALUE = 127;
     
     private static final Predicate<String> IS_CORRECT_LENGTH = (s ->
         s.length() >= MIN_LENGTH && s.length() <= MAX_LENGTH
     );
-    private static final IntPredicate IS_NOT_7_BIT_ASCII = (c -> c >= 128);
+    private static final IntPredicate IS_NOT_7_BIT_ASCII = (i -> i > MAX_7_BIT_VALUE);
     
     public static void main(String[] args) {
         final var passwords = InputHandler.readAsLines(FILENAME);
