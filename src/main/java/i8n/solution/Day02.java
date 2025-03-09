@@ -1,4 +1,4 @@
-package i8n;
+package i8n.solution;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

@@ -1,27 +1,18 @@
-package i8n;
+package i8n.solution;
 
-import java.io.IOException;
+import i8n.util.InputHandler;
+
 import java.nio.charset.StandardCharsets;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.util.List;
 
 public class Day01 {
     
-    private static final String filename = "input/day01.txt";
+    private static final String FILENAME = "input/day01.txt";
     
     public static void main(String[] args) {
-        final var lines = readInput();
+        final var lines = InputHandler.readAsLines(FILENAME);
         final var totalCost = calculateTotalCost(lines);
         System.out.println(totalCost);
-    }
-    
-    private static List<String> readInput() {
-        try {
-            return Files.readAllLines(Path.of(filename), StandardCharsets.UTF_8);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
     }
     
     private static int calculateTotalCost(List<String> lines) {
