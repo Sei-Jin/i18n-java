@@ -59,7 +59,6 @@ public class Day02 {
         return entryCounts;
     }
     
-    
     private static String formatOutput(ZonedDateTime appearsFourOrMoreTimes) {
         var output = appearsFourOrMoreTimes.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
         
