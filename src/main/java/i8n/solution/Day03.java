@@ -24,8 +24,6 @@ public class Day03 {
     }
     
     private static boolean isValidPassword(String password) {
-        var valid = true;
-        
         if (password.length() < 4 || password.length() > 12) {
             return false;
         }
@@ -46,7 +44,7 @@ public class Day03 {
             return false;
         }
         
-        return valid;
+        return true;
     }
     
     private static boolean containsUppercaseAlphabetic(String password) {
