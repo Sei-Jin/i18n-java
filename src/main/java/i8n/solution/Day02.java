@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class Day02 {
     
-    private static final String filename = "input/day02_test.txt";
+    private static final String filename = "input/day02.txt";
     
     public static void main(String[] args) {
         final var times = readInput();
