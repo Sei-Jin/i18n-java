@@ -1,6 +1,6 @@
 package i8n.solution;
 
-import i8n.util.InputHandler;
+import i8n.util.Parser;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -10,7 +10,7 @@ public class Day01 {
     private static final String FILENAME = "input/day01.txt";
     
     public static void main(String[] args) {
-        final var lines = InputHandler.readAsLines(FILENAME);
+        final var lines = Parser.readAllLines(FILENAME);
         final var totalCost = calculateTotalCost(lines);
         System.out.println(totalCost);
     }

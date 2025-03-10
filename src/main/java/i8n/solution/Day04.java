@@ -1,6 +1,6 @@
 package i8n.solution;
 
-import i8n.util.InputHandler;
+import i8n.util.Parser;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -21,7 +21,7 @@ public class Day04 {
     
     public static void main(String[] args) {
         var sum = 0L;
-        final var lines = InputHandler.readAsLines(FILENAME);
+        final var lines = Parser.readAllLines(FILENAME);
         
         for (int i = 0; i < lines.size(); i += 3) {
             final var departureTime = parseZonedDateTime(lines.get(i));

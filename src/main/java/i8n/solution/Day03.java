@@ -1,6 +1,6 @@
 package i8n.solution;
 
-import i8n.util.InputHandler;
+import i8n.util.Parser;
 
 import java.nio.charset.CharsetEncoder;
 import java.nio.charset.StandardCharsets;
@@ -23,7 +23,7 @@ public class Day03 {
     );
     
     public static void main(String[] args) {
-        final var passwords = InputHandler.readAsLines(FILENAME);
+        final var passwords = Parser.readAllLines(FILENAME);
         
         final var valid = passwords
             .stream()
