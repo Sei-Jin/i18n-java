@@ -20,8 +20,8 @@ public class Day04 {
         .ofPattern("MMM dd, yyyy, HH:mm");
     
     public static void main(String[] args) {
-        var sum = 0L;
         final var lines = Parser.readAllLines(FILENAME);
+        var sum = 0L;
         
         for (int i = 0; i < lines.size(); i += 3) {
             final var departureTime = parseZonedDateTime(lines.get(i));
