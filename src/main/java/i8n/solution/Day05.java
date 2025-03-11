@@ -24,13 +24,9 @@ public class Day05 {
             .max()
             .orElseThrow();
         
-        final var points = IntStream
+        final var count = IntStream
             .range(0, codePointLists.size())
             .mapToObj(i -> new Point(i, ((i * 2) % maxLength)))
-            .toList();
-        
-        final var count = points
-            .stream()
             .filter(p -> p.column() < codePointLists.get(p.row()).size())
             .filter(p -> codePointLists.get(p.row()).get(p.column()).equals(PILE_OF_POO))
             .count();
