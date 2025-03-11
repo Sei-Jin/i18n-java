@@ -24,7 +24,8 @@ public class Day05 {
             .max()
             .orElseThrow();
         
-        final var points = IntStream.range(0, codePointLists.size())
+        final var points = IntStream
+            .range(0, codePointLists.size())
             .mapToObj(i -> new Point(i, ((i * 2) % maxLength)))
             .toList();
         
