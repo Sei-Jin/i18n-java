@@ -3,6 +3,7 @@ package i8n.solution;
 import i8n.util.Parser;
 
 import java.util.List;
+import java.util.stream.IntStream;
 
 public class Day05 {
     
@@ -12,27 +13,29 @@ public class Day05 {
     public static void main(String[] args) {
         final var lines = Parser.readAllLines(FILENAME);
         
-        final var codePointList = lines
+        final var codePointLists = lines
             .stream()
             .map(s -> s.codePoints().boxed().toList())
             .toList();
         
-        final var maxLength = codePointList
+        final var maxLength = codePointLists
             .stream()
             .mapToInt(List::size)
             .max()
             .orElseThrow();
         
-        var count = 0;
-        var column = 0;
+        final var points = IntStream.range(0, codePointLists.size())
+            .mapToObj(i -> new Point(i, ((i * 2) % maxLength)))
+            .toList();
         
-        for (final var codePoints : codePointList) {
-            if (column < codePoints.size() && codePoints.get(column).equals(PILE_OF_POO)) {
-                count++;
-            }
-            column = ((column + 2) % maxLength);
-        }
+        final var count = points
+            .stream()
+            .filter(p -> p.column() < codePointLists.get(p.row()).size())
+            .filter(p -> codePointLists.get(p.row()).get(p.column()).equals(PILE_OF_POO))
+            .count();
         
         System.out.println(count);
     }
+    
+    private record Point(int row, int column) {}
 }
