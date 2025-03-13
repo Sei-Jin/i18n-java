@@ -19,9 +19,9 @@ public class Day02 implements Solver<String> {
             .map(time -> time.withZoneSameInstant(ZoneOffset.UTC))
             .toList();
         
-        final var entryCounts = countEntries(normalizedTimes);
+        final var timeCounts = countEntries(normalizedTimes);
         
-        final var appearsFourOrMoreTimes = entryCounts
+        final var appearsFourOrMoreTimes = timeCounts
             .entrySet()
             .stream()
             .filter(entry -> entry.getValue() >= 4)
@@ -45,10 +45,10 @@ public class Day02 implements Solver<String> {
         return entryCounts;
     }
     
-    private static String formatOutput(ZonedDateTime appearsFourOrMoreTimes) {
-        var output = appearsFourOrMoreTimes.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+    private static String formatOutput(ZonedDateTime time) {
+        var output = time.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
         
-        if (appearsFourOrMoreTimes.getZone() == ZoneOffset.UTC) {
+        if (time.getZone() == ZoneOffset.UTC) {
             output = output.substring(0, output.length() - 1) + "+00:00";
         }
         
