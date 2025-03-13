@@ -25,8 +25,8 @@ public class Day02 implements Solver<String> {
             .entrySet()
             .stream()
             .filter(entry -> entry.getValue() >= 4)
-            .map(Map.Entry::getKey)
             .findFirst()
+            .map(Map.Entry::getKey)
             .orElseThrow(() -> new AssertionError(
                 "No entries had a value of 4 or more.")
             );
