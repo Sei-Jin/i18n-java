@@ -1,6 +1,6 @@
 package i18n.year2025;
 
-import i18n.util.Parser;
+import i18n.Solver;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -9,9 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.regex.Pattern;
 
-public class Day04 {
-    
-    private static final String FILENAME = "input/day04.txt";
+public class Day04 implements Solver<Integer> {
     
     private static final Pattern PATTERN = Pattern
         .compile("\\w+:\\s+([\\w/-]+)\\s+(\\w{3} \\d{2}, \\d{4}, \\d{2}:\\d{2})");
@@ -19,18 +17,19 @@ public class Day04 {
     private static final DateTimeFormatter DATE_TIME_FORMATTER = DateTimeFormatter
         .ofPattern("MMM dd, yyyy, HH:mm");
     
-    public static void main(String[] args) {
-        final var lines = Parser.readAllLines(FILENAME);
-        var sum = 0L;
+    @Override
+    public Integer solve(String input) {
+        final var lines = input.lines().toList();
+        var sum = 0;
         
         for (int i = 0; i < lines.size(); i += 3) {
             final var departureTime = parseZonedDateTime(lines.get(i));
             final var arrivalTime = parseZonedDateTime(lines.get(i + 1));
             
-            sum +=  departureTime.until(arrivalTime, ChronoUnit.MINUTES);
+            sum += (int) departureTime.until(arrivalTime, ChronoUnit.MINUTES);
         }
         
-        System.out.println(sum);
+        return sum;
     }
     
     private static ZonedDateTime parseZonedDateTime(String string) {
