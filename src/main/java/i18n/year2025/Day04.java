@@ -19,10 +19,14 @@ public class Day04 implements Solver<Integer> {
     
     @Override
     public Integer solve(String input) {
-        final var lines = input.lines().toList();
+        final var lines = input
+            .lines()
+            .filter(line -> !line.isEmpty())
+            .toList();
+        
         var sum = 0;
         
-        for (int i = 0; i < lines.size(); i += 3) {
+        for (int i = 0; i < lines.size(); i += 2) {
             final var departure = parseTime(lines.get(i));
             final var arrival = parseTime(lines.get(i + 1));
             
