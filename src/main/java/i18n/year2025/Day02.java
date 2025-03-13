@@ -1,8 +1,7 @@
 package i18n.year2025;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
+import i18n.Solver;
+
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,15 +9,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Day02 {
+public class Day02 implements Solver<String> {
     
-    private static final String filename = "input/day02.txt";
-    
-    public static void main(String[] args) {
-        final var times = readInput();
-        
-        final var normalizedTimes = times
-            .stream()
+    @Override
+    public String solve(String input) {
+        final var normalizedTimes = input
+            .lines()
+            .map(ZonedDateTime::parse)
             .map(time -> time.withZoneSameInstant(ZoneOffset.UTC))
             .toList();
         
@@ -34,18 +31,7 @@ public class Day02 {
                 "No entries had a value of 4 or more.")
             );
         
-        final var output = formatOutput(appearsFourOrMoreTimes);
-        System.out.println(output);
-    }
-    
-    private static List<ZonedDateTime> readInput() {
-        try (final var reader = new BufferedReader(new FileReader(filename))) {
-            return reader.lines()
-                .map(ZonedDateTime::parse)
-                .toList();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        return formatOutput(appearsFourOrMoreTimes);
     }
     
     private static <T> Map<T, Integer> countEntries(List<T> list) {
