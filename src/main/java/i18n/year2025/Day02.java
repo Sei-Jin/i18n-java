@@ -1,4 +1,4 @@
-package i18n.solution;
+package i18n.year2025;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
