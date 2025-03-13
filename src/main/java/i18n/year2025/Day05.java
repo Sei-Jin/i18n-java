@@ -1,17 +1,17 @@
 package i18n.year2025;
 
-import i18n.util.Parser;
+import i18n.Solver;
 
 import java.util.List;
 import java.util.stream.IntStream;
 
-public class Day05 {
+public class Day05 implements Solver<Integer> {
     
-    private static final String FILENAME = "input/day05.txt";
     private static final int PILE_OF_POO = Character.codePointOf("PILE OF POO");
     
-    public static void main(String[] args) {
-        final var lines = Parser.readAllLines(FILENAME);
+    @Override
+    public Integer solve(String input) {
+        final var lines = input.lines().toList();
         
         final var codePointLists = lines
             .stream()
@@ -24,14 +24,12 @@ public class Day05 {
             .max()
             .orElseThrow();
         
-        final var count = IntStream
+        return (int) IntStream
             .range(0, codePointLists.size())
             .mapToObj(i -> new Point(i, ((i * 2) % maxLength)))
             .filter(p -> p.column() < codePointLists.get(p.row()).size())
             .filter(p -> codePointLists.get(p.row()).get(p.column()).equals(PILE_OF_POO))
             .count();
-        
-        System.out.println(count);
     }
     
     private record Point(int row, int column) {}
