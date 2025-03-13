@@ -21,7 +21,7 @@ public class Day02 implements Solver<String> {
         
         final var timeCounts = countEntries(normalizedTimes);
         
-        final var appearsFourOrMoreTimes = timeCounts
+        final var time = timeCounts
             .entrySet()
             .stream()
             .filter(entry -> entry.getValue() >= 4)
@@ -31,7 +31,7 @@ public class Day02 implements Solver<String> {
                 "No entries had a value of 4 or more.")
             );
         
-        return formatOutput(appearsFourOrMoreTimes);
+        return time.format(DateTimeFormatter.ofPattern("y-MM-dd'T'H:m:ssxxx"));
     }
     
     private static <T> Map<T, Integer> countEntries(List<T> list) {
@@ -43,15 +43,5 @@ public class Day02 implements Solver<String> {
         }
         
         return entryCounts;
-    }
-    
-    private static String formatOutput(ZonedDateTime time) {
-        var output = time.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME);
-        
-        if (time.getZone() == ZoneOffset.UTC) {
-            output = output.substring(0, output.length() - 1) + "+00:00";
-        }
-        
-        return output;
     }
 }
