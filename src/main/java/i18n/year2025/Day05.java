@@ -11,10 +11,8 @@ public class Day05 implements Solver<Integer> {
     
     @Override
     public Integer solve(String input) {
-        final var lines = input.lines().toList();
-        
-        final var codePointLists = lines
-            .stream()
+        final var codePointLists = input
+            .lines()
             .map(s -> s.codePoints().boxed().toList())
             .toList();
         
