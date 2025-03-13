@@ -23,24 +23,24 @@ public class Day04 implements Solver<Integer> {
         var sum = 0;
         
         for (int i = 0; i < lines.size(); i += 3) {
-            final var departureTime = parseZonedDateTime(lines.get(i));
-            final var arrivalTime = parseZonedDateTime(lines.get(i + 1));
+            final var departure = parseTime(lines.get(i));
+            final var arrival = parseTime(lines.get(i + 1));
             
-            sum += (int) departureTime.until(arrivalTime, ChronoUnit.MINUTES);
+            sum += (int) departure.until(arrival, ChronoUnit.MINUTES);
         }
         
         return sum;
     }
     
-    private static ZonedDateTime parseZonedDateTime(String string) {
+    private static ZonedDateTime parseTime(String string) {
         final var matcher = PATTERN.matcher(string);
         
         if (matcher.find()) {
             final var zoneId = ZoneId.of(matcher.group(1));
-            final var localDateTime = LocalDateTime
+            final var time = LocalDateTime
                 .parse(matcher.group(2), DATE_TIME_FORMATTER);
             
-            return ZonedDateTime.of(localDateTime, zoneId);
+            return ZonedDateTime.of(time, zoneId);
         } else {
             throw new IllegalArgumentException(
                 "The string did not match the expected format: " + string
