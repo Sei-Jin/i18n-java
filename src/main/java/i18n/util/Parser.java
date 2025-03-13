@@ -1,4 +1,4 @@
-package i8n.util;
+package i18n.util;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;

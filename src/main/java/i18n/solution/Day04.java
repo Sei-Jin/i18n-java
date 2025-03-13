@@ -1,6 +1,6 @@
-package i8n.solution;
+package i18n.solution;
 
-import i8n.util.Parser;
+import i18n.util.Parser;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
