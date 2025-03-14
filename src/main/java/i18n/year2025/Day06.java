@@ -12,7 +12,7 @@ public class Day06 implements Solver<Integer> {
     public Integer solve(String input) {
         final var parsed = parseInput(input);
         
-        // Range is 1-based indexed instead of 0-based for modulo calculations
+        // Range is 1-based instead of 0-based for modulo calculations
         final var correctedWords = IntStream
             .range(1, parsed.words().size() + 1)
             .mapToObj(i -> {
