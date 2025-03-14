@@ -3,7 +3,6 @@ package i18n.year2025;
 import i18n.Solver;
 
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.stream.IntStream;
 
 public class Day06 implements Solver<Integer> {
@@ -39,19 +38,17 @@ public class Day06 implements Solver<Integer> {
             })
             .toList();
         
-        final var cwLines = new ArrayList<CrosswordLine>();
-        
-        for (var word : crossword) {
-            final var cwLine = IntStream
-                .range(0, word.length())
-                .filter(i -> word.charAt(i) != '.')
-                .mapToObj(i -> new CrosswordLine(word.charAt(i), i, word.length()))
-                .findFirst()
-                .orElseThrow();
-            
-            cwLines.add(cwLine);
-        }
-        
+        final var cwLines = crossword
+            .stream()
+            .map(word ->
+                IntStream
+                    .range(0, word.length())
+                    .filter(i -> word.charAt(i) != '.')
+                    .mapToObj(i -> new CrosswordLine(word.charAt(i), i, word.length()))
+                    .findFirst()
+                    .orElseThrow())
+            .toList();
+
         return cwLines
             .stream()
             .mapToInt(line ->
