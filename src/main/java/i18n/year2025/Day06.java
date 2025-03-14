@@ -27,7 +27,7 @@ public class Day06 implements Solver<Integer> {
             })
             .toList();
         
-        final var cwLines = parsed.crossword()
+        final var crosswordLines = parsed.crossword()
             .stream()
             .map(word ->
                 IntStream
@@ -38,7 +38,7 @@ public class Day06 implements Solver<Integer> {
                     .orElseThrow())
             .toList();
 
-        return cwLines
+        return crosswordLines
             .stream()
             .mapToInt(line ->
                 IntStream
