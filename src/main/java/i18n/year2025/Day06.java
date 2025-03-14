@@ -3,30 +3,19 @@ package i18n.year2025;
 import i18n.Solver;
 
 import java.nio.charset.StandardCharsets;
+import java.util.List;
 import java.util.stream.IntStream;
 
 public class Day06 implements Solver<Integer> {
     
     @Override
     public Integer solve(String input) {
-        final var lines = input.lines().toList();
-        
-        final var emptyLineIndex = IntStream
-            .range(0, lines.size())
-            .filter(i -> lines.get(i).isEmpty())
-            .findFirst()
-            .orElseThrow();
-        
-        final var words = lines.subList(0, emptyLineIndex);
-        final var crossword = lines.subList(emptyLineIndex + 1, lines.size())
-            .stream()
-            .map(String::stripLeading)
-            .toList();
+        final var parsed = parseInput(input);
         
         final var correctedWords = IntStream
-            .range(1, words.size() + 1)
+            .range(1, parsed.words().size() + 1)
             .mapToObj(i -> {
-                final var word = words.get(i - 1);
+                final var word = parsed.words().get(i - 1);
                 
                 if (i % 15 == 0) {
                     return correctEncoding(correctEncoding(word));
@@ -38,7 +27,7 @@ public class Day06 implements Solver<Integer> {
             })
             .toList();
         
-        final var cwLines = crossword
+        final var cwLines = parsed.crossword()
             .stream()
             .map(word ->
                 IntStream
@@ -66,10 +55,29 @@ public class Day06 implements Solver<Integer> {
             .sum();
     }
     
+    private static Input parseInput(String input) {
+        final var lines = input.lines().toList();
+        
+        final var emptyLineIndex = IntStream
+            .range(0, lines.size())
+            .filter(i -> lines.get(i).isEmpty())
+            .findFirst()
+            .orElseThrow();
+        
+        final var words = lines.subList(0, emptyLineIndex);
+        final var crossword = lines.subList(emptyLineIndex + 1, lines.size())
+            .stream()
+            .map(String::stripLeading)
+            .toList();
+        
+        return new Input(words, crossword);
+    }
+    
     private static String correctEncoding(String string) {
         final var bytes = string.getBytes(StandardCharsets.ISO_8859_1);
         return new String(bytes, StandardCharsets.UTF_8);
     }
     
+    private record Input(List<String> words, List<String> crossword) {}
     private record CrosswordLine(char character, int index, int length) {}
 }
