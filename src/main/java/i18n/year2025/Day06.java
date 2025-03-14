@@ -10,7 +10,7 @@ public class Day06 implements Solver<Integer> {
     
     @Override
     public Integer solve(String input) {
-        final var parsed = parseInput(input);
+        final var parsed = parse(input);
         
         // Range is 1-based instead of 0-based for modulo calculations
         final var correctedWords = IntStream
@@ -56,7 +56,7 @@ public class Day06 implements Solver<Integer> {
             .sum();
     }
     
-    private static Input parseInput(String input) {
+    private static Input parse(String input) {
         final var lines = input.lines().toList();
         
         final var emptyLineIndex = IntStream
