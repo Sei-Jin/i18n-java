@@ -30,13 +30,15 @@ public class Day06 implements Solver<Integer> {
         
         final var crosswordLines = parsed.crossword()
             .stream()
+            .map(String::stripLeading)
             .map(word ->
                 IntStream
                     .range(0, word.length())
                     .filter(i -> word.charAt(i) != '.')
                     .mapToObj(i -> new CrosswordLine(word.charAt(i), i, word.length()))
                     .findFirst()
-                    .orElseThrow())
+                    .orElseThrow()
+            )
             .toList();
 
         return crosswordLines
@@ -66,10 +68,7 @@ public class Day06 implements Solver<Integer> {
             .orElseThrow();
         
         final var words = lines.subList(0, emptyLineIndex);
-        final var crossword = lines.subList(emptyLineIndex + 1, lines.size())
-            .stream()
-            .map(String::stripLeading)
-            .toList();
+        final var crossword = lines.subList(emptyLineIndex + 1, lines.size());
         
         return new Input(words, crossword);
     }
