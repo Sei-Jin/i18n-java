@@ -4,9 +4,7 @@ import i18n.Solver;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
-import java.time.format.ResolverStyle;
 import java.util.*;
 
 public class Day09 implements Solver<String> {
@@ -65,24 +63,10 @@ public class Day09 implements Solver<String> {
     
     private static ArrayList<DateTimeFormatter> getDateTimeFormatters() {
         return new ArrayList<>(Arrays.asList(
-            new DateTimeFormatterBuilder()
-                .appendPattern("dd-MM-uu")
-                .toFormatter()
-                .withResolverStyle(ResolverStyle.STRICT),
-            new DateTimeFormatterBuilder()
-                .appendPattern("MM-dd-uu")
-                .toFormatter()
-                .withResolverStyle(ResolverStyle.STRICT),
-            
-            new DateTimeFormatterBuilder()
-                .appendPattern("uu-MM-dd")
-                .toFormatter()
-                .withResolverStyle(ResolverStyle.STRICT),
-            
-            new DateTimeFormatterBuilder()
-                .appendPattern("uu-dd-MM")
-                .toFormatter()
-                .withResolverStyle(ResolverStyle.STRICT)
+            DateTimeFormatter.ofPattern("dd-MM-uu"),
+            DateTimeFormatter.ofPattern("MM-dd-uu"),
+            DateTimeFormatter.ofPattern("uu-MM-dd"),
+            DateTimeFormatter.ofPattern("uu-dd-MM")
         ));
     }
     
