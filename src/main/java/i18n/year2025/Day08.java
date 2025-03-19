@@ -17,15 +17,20 @@ public class Day08 implements Solver<Integer> {
     public Integer solve(String input) {
         return (int) input
             .lines()
-            .map(s -> Normalizer.normalize(s, Normalizer.Form.NFKD))
-            .map(s -> s.replaceAll("\\p{M}", ""))
-            .map(String::toLowerCase)
+            .map(Day08::normalize)
             .filter(s -> s.length() >= MIN_LENGTH && s.length() <= MAX_LENGTH)
             .filter(s -> s.chars().anyMatch(Character::isDigit))
             .filter(s -> VOWELS.matcher(s).find())
             .filter(s -> CONSONANTS.matcher(s).find())
             .filter(Day08::hasAllUniqueCharacters)
             .count();
+    }
+    
+    private static String normalize(String s) {
+        return Normalizer
+            .normalize(s, Normalizer.Form.NFKD)
+            .replaceAll("\\p{M}", "")
+            .toLowerCase();
     }
     
     private static boolean hasAllUniqueCharacters(String s) {
