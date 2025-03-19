@@ -8,6 +8,7 @@ import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.util.regex.Pattern;
+import java.util.stream.Gatherers;
 
 public class Day04 implements Solver<Integer> {
     
@@ -19,21 +20,15 @@ public class Day04 implements Solver<Integer> {
     
     @Override
     public Integer solve(String input) {
-        final var lines = input
+        return input
             .lines()
-            .filter(line -> !line.isEmpty())
-            .toList();
-        
-        var sum = 0;
-        
-        for (int i = 0; i < lines.size(); i += 2) {
-            final var departure = parseTime(lines.get(i));
-            final var arrival = parseTime(lines.get(i + 1));
-            
-            sum += (int) departure.until(arrival, ChronoUnit.MINUTES);
-        }
-        
-        return sum;
+            .gather(Gatherers.windowFixed(3))
+            .mapToInt(window -> {
+                final var departure = parseTime(window.get(0));
+                final var arrival = parseTime(window.get(1));
+                return (int) departure.until(arrival, ChronoUnit.MINUTES);
+            })
+            .sum();
     }
     
     private static ZonedDateTime parseTime(String string) {
